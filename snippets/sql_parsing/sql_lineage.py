@@ -14,6 +14,7 @@ from sqlglot import exp
 
 SQL_DIALECT = "snowflake"
 AUTO_ALIAS_PREFIX = "_col_"
+ErrorDetailsT = T.TypeVar("ErrorDetailsT")
 
 
 class TableSchema(pydantic.BaseModel):
@@ -81,11 +82,15 @@ class QueryLineageRequest(pydantic.BaseModel):
         return self
 
 
-class LineageError(pydantic.BaseModel):
+class GenericError(pydantic.BaseModel, T.Generic[ErrorDetailsT]):
     model_config = pydantic.ConfigDict(extra="forbid")
 
     code: str
     message: str
+    details: ErrorDetailsT
+
+
+class LineageError(GenericError[dict[str, T.Any]]):
     details: dict[str, T.Any] = pydantic.Field(default_factory=dict)
 
 
