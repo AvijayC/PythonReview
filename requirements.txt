@@ -11,7 +11,7 @@ pyee==13.0.1
 pydantic==2.12.5
 pydantic_core==2.41.5
 Pygments==2.19.2
-pytest==9.0.2
+pytest==9.0.3
 python-dateutil==2.9.0.post0
 six==1.17.0
 typing-inspection==0.4.2
